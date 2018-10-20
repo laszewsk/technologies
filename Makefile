@@ -31,8 +31,7 @@ tech:
 	bin/markup-all.py
 	cat dest/chapters/tech/*.md > dest/all.md
 	find dest/chapters/incomming/*.md | xargs -I{} sh -c "cat {}; echo ''" >  dest/incomming.md
-	cat chapters/incomming/*.bib > dest/incomming.bib
-	cat bib/*.bib dest/incomming.bib > dest/all.bib
+	cat bib/*.bib > dest/all.bib
 
 
 html:
@@ -67,14 +66,18 @@ chars:
 	grep -R -n "“" chapters/*/*.md || true
 	grep -R -n "”" chapters/*/*.md || true
 	grep -R -n "…" chapters/*/*.md || true
+	grep -R -n "’" chapters/*/*.md || true
 	grep -R -n "“" bib/*.bib || true
 	grep -R -n "”" bib/*.bib|| true
 	grep -R -n "…" bib/*.bib|| true
+	grep -R -n "’" bib/*.bib|| true
 	$(if $(shell grep -R '>"' chapters/*/*.md), @false, @true)
 	$(if $(shell grep -R "“" chapters/*/*.md), @false, @true)
 	$(if $(shell grep -R "”" chapters/*/*.md), @false, @true)
+	$(if $(shell grep -R "’" chapters/*/*.md), @false, @true)
 	$(if $(shell grep -R "“" bib/*.bib), @false, @true)
 	$(if $(shell grep -R "”" bib/*.bib), @false, @true)
+#	$(if $(shell grep -R "’" bib/*.bib), @false, @true)
 
 #	$(if $(shell grep -R "…" chapters/*/*.md), @false, @trie)
 #	$(if $(shell grep -R "…" bib/*.bib), @true, @false)
